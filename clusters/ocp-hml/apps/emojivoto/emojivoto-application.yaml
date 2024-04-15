@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: emojivoto
+  namespace: argo-cd
+spec:
+  destination:
+    namespace: emojivoto
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: kustomize/deployment
+    repoURL: https://github.com/BuoyantIO/emojivoto
+    targetRevision: HEAD
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
