@@ -59,7 +59,9 @@ notifications:
   #     memory: 128Mi
 ## Redis
 redis:
-  {}
+  serviceAccount:
+    create: true
+    name: "argocd-redis"
   # -- Resource limits and requests for redis
   # resources:
   #   limits:
