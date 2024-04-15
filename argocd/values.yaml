@@ -1,0 +1,98 @@
+openshift:
+  # -- enables using arbitrary uid for argo repo server
+  enabled: true
+## Argo Configs
+configs:
+  # General Argo CD configuration
+  ## Ref: https://github.com/argoproj/argo-cd/blob/master/docs/operator-manual/argocd-cm.yaml
+  cm:
+    # -- Enable exec feature in Argo UI
+    ## Ref: https://argo-cd.readthedocs.io/en/latest/operator-manual/rbac/#exec-resource
+    exec.enabled: true
+    # -- The name of tracking label used by Argo CD for resource pruning
+    application.instanceLabelKey: argocd.argoproj.io/item # (https://kyverno.io/docs/installation/platform-notes/#ownership-clashes)
+    # -- Timeout to discover if a new manifests version got published to the repository
+    timeout.reconciliation: 300s
+## ApplicationSet controller
+applicationSet:
+  {}
+  # -- Resource limits and requests for the ApplicationSet controller pods.
+  # resources:
+  #   limits:
+  #     cpu: 100m
+  #     memory: 128Mi
+  #   requests:
+  #     cpu: 100m
+  #     memory: 128Mi
+## Application controller
+controller:
+  {}
+  # -- Resource limits and requests for the application controller pods
+  # resources:
+  #   limits:
+  #     cpu: 500m
+  #     memory: 512Mi
+  #   requests:
+  #     cpu: 250m
+  #     memory: 256Mi
+## Dex
+dex:
+  {}
+  # -- Resource limits and requests for dex
+  # resources:
+  #   limits:
+  #     cpu: 50m
+  #     memory: 64Mi
+  #   requests:
+  #     cpu: 10m
+  #     memory: 32Mi
+## Notifications controller
+notifications:
+  {}
+  # -- Resource limits and requests for the notifications controller
+  # resources:
+  #   limits:
+  #     cpu: 100m
+  #     memory: 128Mi
+  #   requests:
+  #     cpu: 100m
+  #     memory: 128Mi
+## Redis
+redis:
+  {}
+  # -- Resource limits and requests for redis
+  # resources:
+  #   limits:
+  #     cpu: 200m
+  #     memory: 128Mi
+  #   requests:
+  #     cpu: 100m
+  #     memory: 64Mi
+## Repo Server
+repoServer:
+  ## Repo server Horizontal Pod Autoscaler
+  autoscaling:
+    # -- Enable Horizontal Pod Autoscaler ([HPA]) for the repo server
+    enabled: true
+  # -- Resource limits and requests for the repo server pods
+  # resources:
+  #   limits:
+  #     cpu: 50m
+  #     memory: 128Mi
+  #   requests:
+  #     cpu: 10m
+  #     memory: 64Mi
+## Server
+server:
+  ## Argo CD server Horizontal Pod Autoscaler
+  autoscaling:
+    # -- Enable Horizontal Pod Autoscaler ([HPA]) for the Argo CD server
+    enabled: true
+  # -- Resource limits and requests for the Argo CD server
+  # resources:
+  #   limits:
+  #     cpu: 100m
+  #     memory: 128Mi
+  #   requests:
+  #     cpu: 50m
+  #     memory: 64Mi
