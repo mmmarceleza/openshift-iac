@@ -21,7 +21,7 @@ helm upgrade --install argo-cd argo-cd \
     -n argo-cd \
     --repo=https://argoproj.github.io/argo-helm \
     --version=6.7.10 \
-    -f argocd/values.yaml \
+    -f https://raw.githubusercontent.com/mmmarceleza/openshift-iac/main/argocd/values.yaml \
     --set redis.securityContext.runAsUser="$UID_RANGE" \
     --set redis.securityContext.runAsGroup="$UID_RANGE" \
     --set redis.securityContext.fsGroup="$UID_RANGE"
