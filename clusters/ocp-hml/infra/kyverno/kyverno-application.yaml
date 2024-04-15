@@ -24,6 +24,7 @@ spec:
                     values:
                       - kube-system
                       - kyverno
+                      - argo-cd
                       - openshift
                       - openshift-apiserver
                       - openshift-apiserver-operator

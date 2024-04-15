@@ -1,6 +1,3 @@
-openshift:
-  # -- enables using arbitrary uid for argo repo server
-  enabled: true
 ## Argo Configs
 configs:
   # General Argo CD configuration
@@ -59,9 +56,7 @@ notifications:
   #     memory: 128Mi
 ## Redis
 redis:
-  serviceAccount:
-    create: true
-    name: "argocd-redis"
+  {}
   # -- Resource limits and requests for redis
   # resources:
   #   limits:
