@@ -15,6 +15,14 @@ spec:
     helm:
       releaseName: kyverno
       values: |-
+        webhooksCleanup:
+          securityContext:
+            runAsUser: null
+            runAsGroup: null
+        policyReportsCleanup:
+          securityContext:
+            runAsUser: null
+            runAsGroup: null
         config:
           webhooks:
             - namespaceSelector:

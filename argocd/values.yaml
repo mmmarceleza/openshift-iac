@@ -56,7 +56,9 @@ notifications:
   #     memory: 128Mi
 ## Redis
 redis:
-  {}
+  securityContext:
+    runAsUser: null
+    runAsGroup: null
   # -- Resource limits and requests for redis
   # resources:
   #   limits:
