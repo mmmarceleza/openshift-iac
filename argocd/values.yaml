@@ -74,13 +74,13 @@ repoServer:
     # -- Enable Horizontal Pod Autoscaler ([HPA]) for the repo server
     enabled: true
   # -- Resource limits and requests for the repo server pods
-  # resources:
-  #   limits:
-  #     cpu: 50m
-  #     memory: 128Mi
-  #   requests:
-  #     cpu: 10m
-  #     memory: 64Mi
+  resources:
+    limits:
+      cpu: 50m
+      memory: 128Mi
+    requests:
+      cpu: 10m
+      memory: 64Mi
 ## Server
 server:
   ## Argo CD server Horizontal Pod Autoscaler
@@ -88,10 +88,10 @@ server:
     # -- Enable Horizontal Pod Autoscaler ([HPA]) for the Argo CD server
     enabled: true
   # -- Resource limits and requests for the Argo CD server
-  # resources:
-  #   limits:
-  #     cpu: 100m
-  #     memory: 128Mi
-  #   requests:
-  #     cpu: 50m
-  #     memory: 64Mi
+  resources:
+    limits:
+      cpu: 100m
+      memory: 128Mi
+    requests:
+      cpu: 50m
+      memory: 64Mi
