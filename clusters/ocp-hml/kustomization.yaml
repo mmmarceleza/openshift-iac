@@ -5,5 +5,5 @@ resources:
   ## aplicações de infraestrutura
   - "infra/kyverno/kyverno-application.yaml"
   ## aplicações de negócio
-  - "apps/podinfo/podinfo-application.yaml"
-  - "apps/emojivoto/emojivoto-application.yaml"
+  # - "apps/podinfo/podinfo-application.yaml"
+  # - "apps/emojivoto/emojivoto-application.yaml"
