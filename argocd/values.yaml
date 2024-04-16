@@ -77,10 +77,10 @@ repoServer:
   resources:
     limits:
       cpu: 50m
-      memory: 128Mi
+      memory: 256Mi
     requests:
       cpu: 10m
-      memory: 64Mi
+      memory: 128Mi
 ## Server
 server:
   ## Argo CD server Horizontal Pod Autoscaler
@@ -91,7 +91,7 @@ server:
   resources:
     limits:
       cpu: 100m
-      memory: 128Mi
+      memory: 256Mi
     requests:
       cpu: 50m
-      memory: 64Mi
+      memory: 128Mi
