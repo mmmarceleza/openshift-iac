@@ -1,8 +1,6 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  annotations:
-    argocd.argoproj.io/sync-wave: "2"
   name: kyverno
   namespace: argo-cd
 spec:
@@ -13,7 +11,7 @@ spec:
   source:
     chart: kyverno
     repoURL: https://kyverno.github.io/kyverno
-    targetRevision: 3.1.4
+    targetRevision: 3.2.4
     helm:
       releaseName: kyverno
       values: |
@@ -110,7 +108,7 @@ spec:
             preferredDuringSchedulingIgnoredDuringExecution:
               - preference:
                   matchExpressions:
-                    - key: role
+                    - key: env
                       operator: In
                       values:
                         - infra
@@ -130,15 +128,15 @@ spec:
           serviceMonitor:
             enabled: false
           tolerations:
-            - key: dedicated
-              value: infra
+            - key: infra
+              value: reserved
               effect: NoSchedule
         backgroundController:
           nodeAffinity:
             preferredDuringSchedulingIgnoredDuringExecution:
               - preference:
                   matchExpressions:
-                    - key: role
+                    - key: env
                       operator: In
                       values:
                         - infra
@@ -159,15 +157,15 @@ spec:
           serviceMonitor:
             enabled: false
           tolerations:
-            - key: dedicated
-              value: infra
+            - key: infra
+              value: reserved
               effect: NoSchedule
         cleanupController:
           nodeAffinity:
             preferredDuringSchedulingIgnoredDuringExecution:
               - preference:
                   matchExpressions:
-                    - key: role
+                    - key: env
                       operator: In
                       values:
                         - infra
@@ -188,15 +186,15 @@ spec:
           serviceMonitor:
             enabled: false
           tolerations:
-            - key: dedicated
-              value: infra
+            - key: infra
+              value: reserved
               effect: NoSchedule
         reportsController:
           nodeAffinity:
             preferredDuringSchedulingIgnoredDuringExecution:
               - preference:
                   matchExpressions:
-                    - key: role
+                    - key: env
                       operator: In
                       values:
                         - infra
@@ -217,8 +215,8 @@ spec:
           serviceMonitor:
             enabled: false
           tolerations:
-            - key: dedicated
-              value: infra
+            - key: infra
+              value: reserved
               effect: NoSchedule
   syncPolicy:
     automated:
