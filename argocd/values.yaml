@@ -101,7 +101,7 @@ notifications:
 
   # notifiers:
   #   service.webhook.slack_webhook: |
-  #     url: https://hooks.slack.com/services/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
+  #     url: xxxx
   #     headers:
   #     - name: Content-Type
   #       value: application/json
