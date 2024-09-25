@@ -45,17 +45,6 @@ dex:
   #   requests:
   #     cpu: 10m
   #     memory: 32Mi
-## Notifications controller
-notifications:
-  {}
-  # -- Resource limits and requests for the notifications controller
-  # resources:
-  #   limits:
-  #     cpu: 100m
-  #     memory: 128Mi
-  #   requests:
-  #     cpu: 100m
-  #     memory: 128Mi
 ## Redis
 redis:
   securityContext:
@@ -97,3 +86,84 @@ server:
   #   requests:
   #     cpu: 100m
   #     memory: 128Mi
+## Notifications controller
+notifications:
+  {}
+
+  # -- Resource limits and requests for the notifications controller
+  # resources:
+  #   limits:
+  #     cpu: 100m
+  #     memory: 128Mi
+  #   requests:
+  #     cpu: 100m
+  #     memory: 128Mi
+
+  # notifiers:
+  #   service.webhook.slack_webhook: |
+  #     url: https://hooks.slack.com/services/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
+  #     headers:
+  #     - name: Content-Type
+  #       value: application/json
+  #
+  #   template.send-slack: |
+  #     webhook:
+  #       slack_webhook:
+  #         method: POST
+  #         body: |
+  #           {
+  #             "attachments": [{
+  #               "title": "{{.app.metadata.name}}",
+  #               "title_link": "{{.context.argocdUrl}}/applications/{{.app.metadata.name}}",
+  #               "color": "#18be52",
+  #               "fields": [{
+  #                 "title": "Sync Status",
+  #                 "value": "{{.app.status.sync.status}}",
+  #                 "short": true
+  #               }, {
+  #                 "title": "Repository",
+  #                 "value": "{{.app.spec.source.repoURL}}",
+  #                 "short": true
+  #               }]
+  #             }]
+  #           }
+  # subscriptions: |
+  #   - recipients:
+  #     - webhook:slack_webhook
+  #     triggers:
+  #       - on-health-degraded
+  #       - on-sync-failed
+  #       - on-sync-status-unknown
+  #
+  # triggers:
+  #   trigger.on-deployed: |
+  #     - description: Application is synced and healthy. Triggered once per commit.
+  #       oncePer: app.status.sync.revision
+  #       send:
+  #       - app-deployed
+  #       when: app.status.operationState.phase in ['Succeeded'] and app.status.health.status == 'Healthy'
+  #   trigger.on-health-degraded: |
+  #     - description: Application has degraded
+  #       send:
+  #       - app-health-degraded
+  #       when: app.status.health.status == 'Degraded'
+  #   trigger.on-sync-failed: |
+  #     - description: Application syncing has failed
+  #       send:
+  #       - app-sync-failed
+  #       when: app.status.operationState.phase in ['Error', 'Failed']
+  #   trigger.on-sync-running: |
+  #     - description: Application is being synced
+  #       send:
+  #       - app-sync-running
+  #       when: app.status.operationState.phase in ['Running']
+  #   trigger.on-sync-status-unknown: |
+  #     - description: Application status is 'Unknown'
+  #       send:
+  #       - app-sync-status-unknown
+  #       when: app.status.sync.status == 'Unknown'
+  #   trigger.on-sync-succeeded: |
+  #     - description: Application syncing has succeeded
+  #       send:
+  #       - app-sync-succeeded
+  #       when: app.status.operationState.phase in ['Succeeded']
